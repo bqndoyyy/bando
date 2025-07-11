@@ -1,0 +1,26 @@
+-- Create the UI
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ToggleRedUI"
+screenGui.Parent = playerGui
+
+local redFrame = Instance.new("Frame")
+redFrame.Size = UDim2.new(1, 0, 1, 0) -- Full screen
+redFrame.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Red color
+redFrame.BorderSizePixel = 0
+redFrame.Parent = screenGui
+
+-- Start with UI visible
+redFrame.Visible = true
+
+-- Toggle UI visibility on LeftAlt press
+local UserInputService = game:GetService("UserInputService")
+
+UserInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.LeftAlt then
+        redFrame.Visible = not redFrame.Visible
+    end
+end)
